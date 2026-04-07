@@ -1,58 +1,76 @@
-# Chat Hooks
+# Chat Hooks Monorepo
 
-A modern monorepo for real-time chat infrastructure, built for scale and clean architecture.
+Production-oriented monorepo for real-time chat infrastructure with strict architectural boundaries and reusable packages.
 
-## Highlights
+## Overview
 
-- **Monorepo-first** with `pnpm` workspaces
-- **Decoupled apps** (`frontend` + `backend`)
-- **Shared contracts** in one place (`packages/shared`)
-- **Framework-agnostic SDK core** with optional React hooks adapter
-- **Single command DX** for local development
+This repository is organized as a `pnpm` workspace with:
 
-## Workspace Structure
+- `apps/frontend`: Next.js demo application
+- `apps/backend`: WebSocket real-time server
+- `packages/chat-client`: framework-agnostic chat SDK + React adapter
+- `packages/shared`: shared contracts, types, and utilities
+
+## Repository Structure
 
 ```text
 apps/
-  frontend/      # Next.js demo app
-  backend/       # WebSocket real-time server
+  frontend/
+  backend/
 
 packages/
-  chat-client/   # Core chat SDK + React adapter
-  shared/        # Shared types, contracts, and utilities
+  chat-client/
+  shared/
 ```
 
-## Architecture Rules
+## Architecture Constraints
 
 - Frontend and backend are fully decoupled.
-- Event/message schemas live only in `packages/shared`.
-- SDK core logic stays framework-agnostic in `packages/chat-client/src/index.ts`.
-- UI-specific hooks live separately in `packages/chat-client/src/react.ts`.
-- No duplicated business logic between apps.
+- Shared schemas and contracts are defined only in `packages/shared`.
+- SDK core remains framework-agnostic in `packages/chat-client/src/index.ts`.
+- Framework bindings are isolated in `packages/chat-client/src/react.ts`.
+- Business logic is not duplicated across frontend/backend.
 
-## Quick Start
+## Technology Versions
+
+| Technology | Version |
+| --- | --- |
+| Node.js | 18+ recommended |
+| pnpm | `9.12.0` (workspace package manager) |
+| TypeScript | `^5.6.3` |
+| Next.js | `15.0.0` |
+| React | `18.3.1` |
+| WebSocket server (`ws`) | `^8.18.0` |
+| React Query | `^5.59.20` |
+| Supabase JS | `^2.47.10` |
+| Zustand | `^5.0.1` |
+| Vitest | `^2.1.4` |
+| TSX | `^4.19.1` |
+| Tailwind CSS | `^3.4.14` |
+
+## Getting Started
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-Open:
+Endpoints:
 
 - Frontend: [http://localhost:3000](http://localhost:3000)
 - Backend WebSocket: `ws://localhost:8080`
 
-## Scripts
+## Root Commands
 
-### Root Scripts
+| Command | Description |
+| --- | --- |
+| `pnpm dev` | Run frontend and backend together with hot reload |
+| `pnpm build` | Build all workspaces |
+| `pnpm test` | Run tests across all workspaces |
+| `pnpm typecheck` | Type-check all workspaces |
+| `pnpm lint` | Run lint script in all workspaces |
 
-- `pnpm dev` — run frontend + backend with hot reload
-- `pnpm build` — build all workspaces
-- `pnpm test` — run tests in all workspaces
-- `pnpm typecheck` — type-check all workspaces
-- `pnpm lint` — lint all workspaces
-
-### Run a Single Workspace
+## Workspace Commands
 
 ```bash
 pnpm --filter @chat-hooks/frontend dev
@@ -61,18 +79,11 @@ pnpm --filter @chat-hooks/chat-client test
 pnpm --filter @chat-hooks/shared build
 ```
 
-## Package Overview
+## Package Responsibilities
 
-- `@chat-hooks/frontend`: Next.js app consuming the SDK
-- `@chat-hooks/backend`: WebSocket server implementing shared contracts
-- `@chat-hooks/chat-client`: reusable client SDK
-- `@chat-hooks/shared`: shared types and protocol envelopes
-
-## Tech Stack
-
-- TypeScript
-- Next.js
-- WebSocket (`ws`)
-- React
-- Vitest
-- pnpm workspaces
+| Package | Responsibility |
+| --- | --- |
+| `@chat-hooks/frontend` | Demo app and UI integration |
+| `@chat-hooks/backend` | Real-time server implementation |
+| `@chat-hooks/chat-client` | Reusable SDK for client communication |
+| `@chat-hooks/shared` | Event contracts and shared domain types |
