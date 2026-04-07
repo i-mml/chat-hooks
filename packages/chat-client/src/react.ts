@@ -35,3 +35,55 @@ export function useRoomMessages(client: ChatClient, roomId: string): ChatMessage
 
   return messages;
 }
+
+type ChatStatus = "connecting" | "connected" | "disconnected";
+
+type UseChatConfig = {
+  url: string;
+  userId: string;
+};
+
+export function useChat(roomId: string, config: UseChatConfig) {
+  const client = useChatClient(config.url);
+  const messages = useRoomMessages(client, roomId);
+  const [status, setStatus] = useState<ChatStatus>("connecting");
+
+  useEffect(() => {
+    // Keep trying to join until the socket becomes ready.
+    setStatus("connecting");
+    const interval = window.setInterval(() => {
+      try {
+        client.emit("chat:join", { roomId, userId: config.userId });
+        setStatus("connected");
+        window.clearInterval(interval);
+      } catch {
+        setStatus("connecting");
+      }
+    }, 300);
+
+    return () => window.clearInterval(interval);
+  }, [client, roomId, config.userId]);
+
+  useEffect(() => {
+    const handleOffline = () => setStatus("disconnected");
+    const handleOnline = () => setStatus("connected");
+    window.addEventListener("offline", handleOffline);
+    window.addEventListener("online", handleOnline);
+
+    return () => {
+      window.removeEventListener("offline", handleOffline);
+      window.removeEventListener("online", handleOnline);
+    };
+  }, []);
+
+  return {
+    messages,
+    status,
+    sendMessage: (text: string) =>
+      client.emit("chat:send", {
+        roomId,
+        userId: config.userId,
+        text,
+      }),
+  };
+}
