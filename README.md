@@ -1,10 +1,32 @@
-# Chat Hooks Monorepo
+# Chat Hooks
 
-Production-oriented monorepo for real-time chat infrastructure with strict architectural boundaries and reusable packages.
+> A real-time chat infrastructure that feels like `useState`.
 
-## Overview
+Build scalable real-time applications without dealing with WebSocket complexity directly.
 
-This repository is organized as a `pnpm` workspace with:
+---
+
+## What is this?
+
+Most real-time systems force you to think in terms of:
+
+- WebSocket connections
+- Event listeners
+- Manual state synchronization
+- Reconnection logic
+- Backend coordination
+
+**Chat Hooks flips that model.**
+
+Instead of managing infrastructure, you use a simple hook:
+
+```ts
+const { messages, sendMessage, status } = useChat(roomId);
+```
+
+## Monorepo Overview
+
+This repository is organized as a `pnpm` workspace:
 
 - `apps/frontend`: Next.js demo application
 - `apps/backend`: WebSocket real-time server
@@ -31,22 +53,13 @@ packages/
 - Framework bindings are isolated in `packages/chat-client/src/react.ts`.
 - Business logic is not duplicated across frontend/backend.
 
-## Technology Versions
+## Stack
 
-| Technology | Version |
-| --- | --- |
-| Node.js | 18+ recommended |
-| pnpm | `9.12.0` (workspace package manager) |
-| TypeScript | `^5.6.3` |
-| Next.js | `15.0.0` |
-| React | `18.3.1` |
-| WebSocket server (`ws`) | `^8.18.0` |
-| React Query | `^5.59.20` |
-| Supabase JS | `^2.47.10` |
-| Zustand | `^5.0.1` |
-| Vitest | `^2.1.4` |
-| TSX | `^4.19.1` |
-| Tailwind CSS | `^3.4.14` |
+[![Next.js](https://img.shields.io/badge/Next.js-App%20Router-000000?logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-Auth%20%2B%20Realtime-3FCF8E?logo=supabase&logoColor=white)](https://supabase.com/)
+[![TanStack Query](https://img.shields.io/badge/TanStack%20Query-Data%20Layer-FF4154?logo=react-query&logoColor=white)](https://tanstack.com/query)
+[![Storybook](https://img.shields.io/badge/Storybook-Design%20System-FF4785?logo=storybook&logoColor=white)](https://storybook.js.org/)
 
 ## Getting Started
 
