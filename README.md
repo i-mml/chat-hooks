@@ -57,9 +57,10 @@ packages/
 
 [![Next.js](https://img.shields.io/badge/Next.js-App%20Router-000000?logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Supabase](https://img.shields.io/badge/Supabase-Auth%20%2B%20Realtime-3FCF8E?logo=supabase&logoColor=white)](https://supabase.com/)
-[![TanStack Query](https://img.shields.io/badge/TanStack%20Query-Data%20Layer-FF4154?logo=react-query&logoColor=white)](https://tanstack.com/query)
-[![Storybook](https://img.shields.io/badge/Storybook-Design%20System-FF4785?logo=storybook&logoColor=white)](https://storybook.js.org/)
+[![React](https://img.shields.io/badge/React-18-149ECA?logo=react&logoColor=white)](https://react.dev/)
+[![WebSocket](https://img.shields.io/badge/WebSocket-ws%20server-333333)](https://github.com/websockets/ws)
+[![Vitest](https://img.shields.io/badge/Vitest-Tests-729B1B?logo=vitest&logoColor=white)](https://vitest.dev/)
+[![pnpm](https://img.shields.io/badge/pnpm-Workspaces-F69220?logo=pnpm&logoColor=white)](https://pnpm.io/)
 
 ## Getting Started
 
