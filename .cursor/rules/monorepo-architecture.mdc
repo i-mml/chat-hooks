@@ -1,0 +1,10 @@
+---
+alwaysApply: true
+description: Monorepo architecture and boundaries for chat-hooks
+---
+# Monorepo Architecture Rules
+
+- Workspaces are split into [apps/frontend/package.json](mdc:apps/frontend/package.json), [apps/backend/package.json](mdc:apps/backend/package.json), [packages/chat-client/package.json](mdc:packages/chat-client/package.json), and [packages/shared/package.json](mdc:packages/shared/package.json).
+- Shared contracts and reusable utilities must live in [packages/shared/src/index.ts](mdc:packages/shared/src/index.ts).
+- Frontend/backend communication should rely on shared event contracts and never duplicate message schemas.
+- Keep the SDK core framework-agnostic in [packages/chat-client/src/index.ts](mdc:packages/chat-client/src/index.ts), with UI adapters separated like [packages/chat-client/src/react.ts](mdc:packages/chat-client/src/react.ts).
